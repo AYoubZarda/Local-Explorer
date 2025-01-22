@@ -1,0 +1,48 @@
+/* Location form styles */
+.location-form {
+	background: #f2efe7a1;
+	border-radius: 0.5rem;
+	padding: 1.5rem;
+	box-shadow: 0px 0px 800px 19px #2972b2e3;
+}
+
+  .location-form form {
+	display: flex;
+	gap: 1rem;
+  }
+
+  .input-container {
+	flex: 1;
+  }
+
+  .input-container input {
+	width: 100%;
+	padding: 0.5rem 1rem;
+	border: none;
+	background-color: #2972b24b;
+	border-radius: 0.5rem;
+	outline: none;
+	transition: all 0.2s;
+  }
+
+  .input-container input:focus {
+	border-color: #3B82F6;
+	box-shadow: 0 0 0 3px rgba(59, 131, 246, 0.26);
+  }
+
+  .submit-button {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	padding: 0.5rem 1.5rem;
+	background-color: #2563EB;
+	color: rgb(255, 255, 255);
+	border: none;
+	border-radius: 0.5rem;
+	cursor: pointer;
+	transition: background-color 0.2s;
+  }
+
+  .submit-button:hover {
+	background-color: #1D4ED8;
+  }

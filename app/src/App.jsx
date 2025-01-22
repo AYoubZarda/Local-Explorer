@@ -1,7 +1,15 @@
 import { useState, useEffect } from "react";
-import { Cloud, MapPin, Navigation, ThermometerSun, Wind, Droplets, Eye, Compass, Activity, RefreshCw } from "lucide-react";
 import axios from "axios";
 import './App.css';
+
+import Header        from './components/Header';
+import LocationForm  from './components/LocationForm';
+import ErrorMessage  from './components/ErrorMessage';
+import WeatherCard   from './components/WeatherCard';
+import ActivityCard  from './components/ActivityCard';
+import MapContainer  from './components/MapContainer';
+
+
 
 function App() {
   const [position, setPosition] = useState({ latitude: null, longitude: null });
@@ -29,6 +37,11 @@ function App() {
     const apiUrl = import.meta.env.VITE_WEATHER_API_URL;
     const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
 
+    if (!apiUrl || !apiKey) {
+      setError("Weather API URL and key are required");
+      return;
+    }
+
     console.log(apiUrl, apiKey);
 
     try {
@@ -54,6 +67,11 @@ function App() {
     e.preventDefault();
     const apiUrl = import.meta.env.VITE_WEATHER_API_URL;
     const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
+    if (!apiUrl || !apiKey) {
+      setError("Weather API URL and key are required");
+      return;
+    }
+
     try {
       if (!location) {
         setError("Location is required");
@@ -79,6 +97,11 @@ function App() {
   const generateActivities = async (weatherData) => {
     const apiUrl = import.meta.env.VITE_ACTIVITY_API_URL;
     const apiKey = import.meta.env.VITE_ACTIVITY_API_KEY;
+
+    if (!apiUrl || !apiKey) {
+      setError("Activity API URL and key are required");
+      return;
+    }
 
     const prompt = `Based on the following location and weather conditions, suggest a list of the best activities to do today. The location is ${weatherData.name} (latitude: ${weatherData.coord.lat}, longitude: ${weatherData.coord.lon}). The current weather is ${weatherData.weather[0].description} with a temperature of ${weatherData.main.temp}°C, humidity of ${weatherData.main.humidity}%, and wind speed of ${weatherData.wind.speed} m/s. The visibility is ${weatherData.visibility} meters. Please recommend activities that are suitable for this weather and location, including outdoor, cultural, and leisure options.`;
 
@@ -145,139 +168,37 @@ function App() {
     // return `https://maps.google.com/maps?q=${encodeURIComponent(location)}&t=&z=13&ie=UTF8&iwloc=&output=embed`;
     return`https://maps.google.com/maps?q=${position.latitude},${position.longitude}&t=&z=13&ie=UTF8&iwloc=&output=embed`;
   };
-
   return (
     <div className="app-container">
       <div className="content-container">
-        <div className="header">
-          <h1>Local Explorer</h1>
-          <p>Discover perfect activities for your weather</p>
-        </div>
-
+        <Header />
         {!position.latitude && !position.longitude && (
-          <div className="location-form">
-            <form onSubmit={handleLocationSubmit}>
-              <div className="input-container">
-                <input
-                  type="text"
-                  value={location}
-                  onChange={(e) => setLocation(e.target.value)}
-                  placeholder="Enter your location"
-                />
-              </div>
-              <button type="submit" className="submit-button">
-                <MapPin className="icon" />
-                Find
-              </button>
-            </form>
-          </div>
+          <LocationForm
+            location={location}
+            setLocation={setLocation}
+            handleLocationSubmit={handleLocationSubmit}
+          />
         )}
-
-        {error && (
-          <div className="error-message">
-            <p>{error}</p>
-          </div>
-        )}
-
+        {error && <ErrorMessage error={error} />}
         {weather && (
           <>
             <div className="weather-activity-grid">
-              <div className="card weather-card">
-                <h2>
-                  <Cloud className="icon blue" />
-                  Current Weather
-                </h2>
-                <div className="weather-grid">
-                  <div className="weather-item">
-                    <ThermometerSun className="icon orange" />
-                    <div>
-                      <p className="label">Temperature</p>
-                      <p className="value">{weather.main.temp}°C</p>
-                    </div>
-                  </div>
-                  <div className="weather-item">
-                    <Cloud className="icon blue" />
-                    <div>
-                      <p className="label">Weather</p>
-                      <p className="value">{weather.weather[0].description}</p>
-                    </div>
-                  </div>
-                  <div className="weather-item">
-                    <Wind className="icon light-blue" />
-                    <div>
-                      <p className="label">Wind Speed</p>
-                      <p className="value">{weather.wind.speed} m/s</p>
-                    </div>
-                  </div>
-                  <div className="weather-item">
-                    <Droplets className="icon light-blue" />
-                    <div>
-                      <p className="label">Humidity</p>
-                      <p className="value">{weather.main.humidity}%</p>
-                    </div>
-                  </div>
-                  <div className="weather-item">
-                    <Eye className="icon gray" />
-                    <div>
-                      <p className="label">Visibility</p>
-                      <p className="value">{weather.visibility}m</p>
-                    </div>
-                  </div>
-                  <div className="weather-item">
-                    <Compass className="icon gray" />
-                    <div>
-                      <p className="label">Location</p>
-                      <p className="value">{weather.name}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="card activity-card">
-                <h2>
-                  <Activity className="icon green" />
-                  Activity Suggestions
-                </h2>
-                <div className="activity-content">
-                  {activityPrompte && (
-                    <p className="activity-prompt">{activityPrompte}</p>
-                  )}
-                  {displayedActivity ? (
-                    <p className="activity-text">{displayedActivity}</p>
-                  ) : (
-                    <p className="no-activity">No activities generated yet.</p>
-                  )}
-                </div>
-                <div className="button-group">
-                  <button onClick={showNextActivity} className="button green">
-                    <Activity className="icon" />
-                    Next Activity
-                  </button>
-                  <button onClick={handleRefresh} className="button blue">
-                    <RefreshCw className="icon" />
-                    Refresh
-                  </button>
-                </div>
-              </div>
+              <WeatherCard weather={weather} />
+              <ActivityCard
+                activityPrompte={activityPrompte}
+                displayedActivity={displayedActivity}
+                showNextActivity={showNextActivity}
+                handleRefresh={handleRefresh}
+              />
             </div>
-
-            <div className="card map-container">
-              <iframe
-                src={getMapUrl()}
-                width="100%"
-                height="400"
-                style={{ border: 0 }}
-                allowFullScreen=""
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="Google Maps"
-              ></iframe>
-            </div>
+            <MapContainer getMapUrl={getMapUrl} />
           </>
         )}
       </div>
     </div>
   );
-}
+};
 
 export default App;
+
+
