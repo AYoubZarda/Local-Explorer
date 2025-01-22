@@ -1,0 +1,245 @@
+/* Base styles */
+.app-container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #EBF4FF 0%, #E1EFFE 100%);
+    padding: 1.5rem;
+  }
+  
+  .content-container {
+    max-width: 64rem;
+    margin: 0 auto;
+  }
+  
+  /* Header styles */
+  .header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1E3A8A;
+    margin-bottom: 0.5rem;
+  }
+  
+  .header p {
+    color: #2563EB;
+  }
+  
+  /* Location form styles */
+  .location-form {
+    background: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .location-form form {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .input-container {
+    flex: 1;
+  }
+  
+  .input-container input {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    border: 1px solid #D1D5DB;
+    border-radius: 0.5rem;
+    outline: none;
+    transition: all 0.2s;
+  }
+  
+  .input-container input:focus {
+    border-color: #3B82F6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+  }
+  
+  .submit-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1.5rem;
+    background-color: #2563EB;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .submit-button:hover {
+    background-color: #1D4ED8;
+  }
+  
+  /* Error message styles */
+  .error-message {
+    background-color: #FEF2F2;
+    border-left: 4px solid #EF4444;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .error-message p {
+    color: #DC2626;
+  }
+  
+  /* Weather and Activity Grid */
+  .weather-activity-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  @media (min-width: 768px) {
+    .weather-activity-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  /* Card styles */
+  .card {
+    background: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+  }
+  
+  .card h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1F2937;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  /* Weather grid styles */
+  .weather-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  
+  .weather-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .weather-item .label {
+    font-size: 0.875rem;
+    color: #6B7280;
+  }
+  
+  .weather-item .value {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #1F2937;
+  }
+  
+  /* Activity card styles */
+  .activity-content {
+    margin-bottom: 1rem;
+  }
+  
+  .activity-prompt {
+    font-size: 0.875rem;
+    color: #6B7280;
+    font-style: italic;
+    margin-bottom: 0.5rem;
+  }
+  
+  .activity-text {
+
+    min-height: 200px;
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: #1F2937;
+  }
+  
+  .no-activity {
+    color: #6B7280;
+  }
+  
+  /* Button styles */
+  .button-group {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .button {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .button.green {
+    background-color: #059669;
+  }
+  
+  .button.green:hover {
+    background-color: #047857;
+  }
+  
+  .button.blue {
+    background-color: #2563EB;
+  }
+  
+  .button.blue:hover {
+    background-color: #1D4ED8;
+  }
+  
+  /* Icon styles */
+  .icon {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+  
+  .icon.blue {
+    color: #2563EB;
+  }
+  
+  .icon.orange {
+    color: #F59E0B;
+  }
+  
+  .icon.light-blue {
+    color: #60A5FA;
+  }
+  
+  .icon.gray {
+    color: #6B7280;
+  }
+  
+  .icon.green {
+    color: #059669;
+  }
+  
+  /* Map container styles */
+  .map-container {
+    width: 100%;
+    height: 400px;
+    padding: 0;
+    overflow: hidden;
+  }
+  
+  .map-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
