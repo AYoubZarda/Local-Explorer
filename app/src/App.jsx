@@ -9,8 +9,8 @@ function App() {
   const [weather, setWeather] = useState(null);
   const [error, setError] = useState(null);
   const [activities, setActivities] = useState([]);
-  const [displayedActivity, setDisplayedActivity] = useState(""); 
-  const [usedActivities, setUsedActivities] = useState(new Set()); 
+  const [displayedActivity, setDisplayedActivity] = useState("");
+  const [usedActivities, setUsedActivities] = useState(new Set());
   const [activityPrompte, setActivityPrompte] = useState("");
 
   useEffect(() => {
@@ -26,11 +26,14 @@ function App() {
   }, []);
 
   const fetchWeather = async (latitude, longitude) => {
-    const apiKey = "70f3f642cc6fee0fcb12fa0ee8b26eab"; 
+    const apiUrl = import.meta.env.VITE_WEATHER_API_URL;
+    const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
+
+    console.log(apiUrl, apiKey);
+
     try {
-      const response = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`
-      );
+      const response = await axios.get( `${apiUrl}?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`);
+
       const data = response.data;
       if (response.status === 200) {
         setWeather(data);
@@ -49,16 +52,14 @@ function App() {
 
   const handleLocationSubmit = async (e) => {
     e.preventDefault();
-    const apiKey = "70f3f642cc6fee0fcb12fa0ee8b26eab"; 
+    const apiUrl = import.meta.env.VITE_WEATHER_API_URL;
+    const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
     try {
       if (!location) {
         setError("Location is required");
         return;
       }
-
-      const response = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${apiKey}&units=metric`
-      );
+      const response = await axios.get( `${apiUrl}?q=${location}&appid=${apiKey}&units=metric` );
       const data = response.data;
       if (response.status === 200) {
         setWeather(data);
@@ -76,12 +77,14 @@ function App() {
   };
 
   const generateActivities = async (weatherData) => {
-    const apiKey = "AIzaSyBenQYM6K7X749Q45Lqz5qBQLOb_NNlMsc";
+    const apiUrl = import.meta.env.VITE_ACTIVITY_API_URL;
+    const apiKey = import.meta.env.VITE_ACTIVITY_API_KEY;
+
     const prompt = `Based on the following location and weather conditions, suggest a list of the best activities to do today. The location is ${weatherData.name} (latitude: ${weatherData.coord.lat}, longitude: ${weatherData.coord.lon}). The current weather is ${weatherData.weather[0].description} with a temperature of ${weatherData.main.temp}°C, humidity of ${weatherData.main.humidity}%, and wind speed of ${weatherData.wind.speed} m/s. The visibility is ${weatherData.visibility} meters. Please recommend activities that are suitable for this weather and location, including outdoor, cultural, and leisure options.`;
 
     try {
       const response = await axios.post(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
+        `${apiUrl}?key=${apiKey}`,
         {
           contents: [
             {
@@ -95,23 +98,25 @@ function App() {
           },
         }
       );
+
       const data = response.data;
       if (response.status === 200) {
         const newActivities = data.candidates[0].content.parts[0].text
           .split("\n")
-          .filter((activity) => activity.trim() !== ""); 
+          .filter((activity) => activity.trim() !== "");
         setActivityPrompte(newActivities[0]);
         setActivities((prev) => [...prev, ...newActivities]);
         setError(null);
-        showNextActivity(); 
+        showNextActivity();
       } else {
         setError("Failed to generate activities");
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
       setError("Failed to generate activities");
     }
   };
+
 
   const showNextActivity = () => {
     const unusedActivities = activities.filter(
@@ -122,7 +127,7 @@ function App() {
       const randomIndex = Math.floor(Math.random() * unusedActivities.length);
       const nextActivity = unusedActivities[randomIndex];
       setDisplayedActivity(nextActivity);
-      setUsedActivities((prev) => new Set([...prev, nextActivity])); 
+      setUsedActivities((prev) => new Set([...prev, nextActivity]));
     } else {
       setDisplayedActivity("No more unique activities. Refresh for more!");
     }
@@ -137,7 +142,8 @@ function App() {
   const getMapUrl = () => {
     if (!weather) return '';
     const location = `${weather.name},${weather.sys.country || ''}`;
-    return `https://maps.google.com/maps?q=${encodeURIComponent(location)}&t=&z=13&ie=UTF8&iwloc=&output=embed`;
+    // return `https://maps.google.com/maps?q=${encodeURIComponent(location)}&t=&z=13&ie=UTF8&iwloc=&output=embed`;
+    return`https://maps.google.com/maps?q=${position.latitude},${position.longitude}&t=&z=13&ie=UTF8&iwloc=&output=embed`;
   };
 
   return (

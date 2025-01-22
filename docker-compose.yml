@@ -1,0 +1,50 @@
+services:
+  app:
+    build: ./app
+    image: localexplorer:mytag
+    container_name: frontend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./app:/app_continer
+    env_file:
+      - .env
+    restart: always
+    networks:
+      - localexplorer_network
+
+  setup:
+    image: "alpine/openssl:3.3.1"
+    container_name: setup
+    volumes:
+      - ./certs:/certs
+    entrypoint: |
+      sh -c '
+      if [ ! -f /certs/cert.key ]; then
+        echo "Generating the certificates for localexplorer ..."
+        openssl req -x509 -newkey rsa:4096 -nodes -keyout /certs/localexplorer.key -out /certs/localexplorer.crt -days 365 -subj "/C=MA/ST=Béni Mellal-Khénifra/L=Khouribga/O=leetinitiative/CO=localexplorer"; 1>/dev/null
+      fi;
+      echo "localexplorer certificates generated"
+      chmod 666 /certs/*
+      '
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./certs:/etc/nginx/certs
+    depends_on:
+      - app
+    networks:
+      - localexplorer_network
+    restart: always
+
+
+
+networks:
+  localexplorer_network:
+    driver: bridge
