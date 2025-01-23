@@ -3,8 +3,6 @@ services:
     build: ./app
     image: localexplorer:mytag
     container_name: frontend
-    ports:
-      - "3000:3000"
     volumes:
       - ./app/src:/app_continer/src
     env_file:

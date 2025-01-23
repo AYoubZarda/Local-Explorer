@@ -123,6 +123,9 @@ Utilisez cette clé pour VITE_ACTIVITY_API_KEY dans le fichier .env.
     make re
 
 
+ ### Allé à ce lien : https://localhost/ ou au lien de votre machine https://adressip_de_votre_machin
+
+
 # 🗂️ Structure du projet
 app/ : Code source de l'application React.
 
