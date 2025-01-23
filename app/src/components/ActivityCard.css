@@ -10,44 +10,112 @@
 }
 
 
+/* 
+@keyframes shring-animation {
+	0% {
+	  background-position: 0 0;
+	  opacity: 0;
+	  width: 0;
+	}
+	1% {
+	  background-position: 0 0;
+	  opacity: 1;
+	  border-right: 1px solid orange;
+	}
+	50% {
+	  background-position: 150px 0;
+	  opacity: 1;
+	  border-right: 1px solid orange;
+	}
+	100% {
+	  background-position: 400px 0;
+	  opacity: 1;
+	  border-right: 1px solid orange;
+	}
+  }
+  
+  @keyframes type {
+	0% {
+	  width: 0;
+	}
+	1%, 99%{
+	  border-right: 1px solid orange;
+	}
+	100%{
+	  border-right: none;
+	}
+  }
+  
+  @keyframes blink {
+	50% {
+	  border-color: transparent;
+	}
+  } */
+
+
+
+.prompte{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, sans-serif;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  background-color: #213A59;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  /* margin-top: 60px; */
+  /* height: 100%; */
+  margin-top: 5px;
+  /* min-height: 165px;
+  max-height: 165px; */
+  height: 165px;
+  animation: glow 2s infinite alternate;
+
+}
+
 
 .activity-card {
 	background-color: #F5F0E5;
 	backdrop-filter: blur(10px);
 	border: 2px solid rgb(38, 118, 246);
 	border-radius: 0.5rem;
-	padding: 1.5rem; */
+	padding: 1.5rem;
 }
 
-  .activity-card h2 {
+.activity-card h2 {
 	font-size: 1.5rem;
 	font-weight: 600;
 	color: #2563EB;
 	margin-bottom: 1rem;
 	display: flex;
 	align-items: center;
-	gap: 0.5rem;
+	gap: 0.5rem;;
   }
 
-  .activity-content {
+
+
+.activity-content {
 	margin-bottom: 1rem;
-  }
+	display: grid;
+	gap: 20px;
+}
 
-  .activity-prompt {
-	font-size: 1.0rem;
+.activity-prompt {
+	font-size: 1.25rem;
 	color: #000000;
-	margin-bottom: 0.5rem;
-  }
+	/* margin-bottom: 0.5rem; */
+	height: 130px ;
+}
 
-  .activity-text {
-	min-height: 200px;
-	font-size: 1.125rem;
+.activity-text {
+	/* min-height: 200px; */
 	font-weight: 500;
-	color: #253333;
-  }
+	font-size: 1.125rem;
+	color: #63b3ed;
+}
 
-  .no-activity {
-	color: #6B7280;
+.no-activity {
+	color: #63b3ed;
   }
 
   .button-group {

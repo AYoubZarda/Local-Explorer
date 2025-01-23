@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <footer className="footer">
     <div className="footer-bottom">
-      <p>&copy; 2025 Weather & Activities. All rights reserved. Made with ❤️ by AYoub Zarda </p>
+      <p>&copy; 2025 Local Explorer. All rights reserved. Made with ❤️ by AYoub Zarda </p>
       <div className="social-links">
         <a href="https://www.linkedin.com/in/zarda-ayoub/" target="_blank" rel="noopener noreferrer" className="social-link">
           <Linkedin className="icon" />
