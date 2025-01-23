@@ -42,6 +42,9 @@
   max-width: 64rem;
   margin: 0 auto;
   animation: appear 0.5s ease-out forwards;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 .icon {

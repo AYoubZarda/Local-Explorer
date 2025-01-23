@@ -22,11 +22,11 @@ function App() {
   const [displayedActivity, setDisplayedActivity] = useState("");
   const [usedActivities, setUsedActivities] = useState(new Set());
   const [activityPrompte, setActivityPrompte] = useState("");
+  const [mapUrl, setMapUrl] = useState("");
 
 
 const getlocalisation = async () => {
 
-  console.log("getlocalisation oo ");
   const response = await axios.get('https://ipinfo.io/ip');
   if (response.data) {
       const response2 = await axios.get(`https://get.geojs.io/v1/ip/geo/${response.data}`);
@@ -49,7 +49,6 @@ const getlocalisation = async () => {
 
 const handleLocation = () => {
   if (navigator.geolocation) {
-    console.log("navigator.geolocation ", navigator.geolocation);
     navigator.geolocation.getCurrentPosition((position) => {
       fetchWeather(position.coords.latitude, position.coords.longitude);
       setPosition({
@@ -57,14 +56,12 @@ const handleLocation = () => {
       longitude: position.coords.longitude,
     });
     } ,(error) => {
-      console.log("error ", error);
       getlocalisation();}
     ,);
   }
 };
 
 useEffect(() => {
-  
   handleLocation();
 }, []);
 
@@ -77,7 +74,6 @@ useEffect(() => {
       return;
     }
 
-    console.log("latitude ", latitude);
 
     try {
       const response = await axios.get( `${apiUrl}?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`);
@@ -86,6 +82,7 @@ useEffect(() => {
       if (response.status === 200) {
         setWeather(data);
         setError(null);
+        setMapUrl(`https://maps.google.com/maps?q=${latitude},${longitude}&t=&z=13&ie=UTF8&iwloc=&output=embed`)
         generateActivities(data);
         return true;
       } else {
@@ -118,6 +115,7 @@ useEffect(() => {
       if (response.status === 200) {
         setWeather(data);
         setError(null);
+        setMapUrl(`https://maps.google.com/maps?q=${encodeURIComponent(location)}&t=&z=13&ie=UTF8&iwloc=&output=embed`)
         generateActivities(data);
       } else {
         setError(data.message);
@@ -198,24 +196,28 @@ useEffect(() => {
     }
   };
 
-  const getMapUrl = () => {
-    if (!weather) return '';
-    const location = `${weather.name},${weather.sys.country || ''}`;
-    // return `https://maps.google.com/maps?q=${encodeURIComponent(location)}&t=&z=13&ie=UTF8&iwloc=&output=embed`;
-    return`https://maps.google.com/maps?q=${position.latitude},${position.longitude}&t=&z=13&ie=UTF8&iwloc=&output=embed`;
-  };
+  // const getMapUrl = () => {
+
+  //   if(location !==  "" && position.latitude === null && position.longitude === null)
+  //     {
+  //       const locatio = `${weather.name},${weather.sys.country || ''}`;
+  //       console.log("locatio from input", locatio);
+  //       return ;
+
+  //     }
+  //   return;
+  // };
 
   return (
     <div className="app-container">
       <div className="content-container">
         <Header />
-        {!position.latitude && !position.longitude && (
           <LocationForm
             location={location}
             setLocation={setLocation}
             handleLocationSubmit={handleLocationSubmit}
+            handleLocation={handleLocation}
           />
-        )}
         {error && <ErrorMessage error={error} />}
         {weather && (
           <>
@@ -228,7 +230,8 @@ useEffect(() => {
                 handleRefresh={handleRefresh}
               />
             </div>
-            <MapContainer getMapUrl={getMapUrl} />
+            <MapContainer getMapUrl={mapUrl} 
+              setMapUrl={setMapUrl} />
           </>
         )}
       </div>
@@ -241,3 +244,12 @@ useEffect(() => {
 };
 
 export default App;
+
+
+// {!position.latitude && !position.longitude && (
+//   <LocationForm
+//     location={location}
+//     setLocation={setLocation}
+//     handleLocationSubmit={handleLocationSubmit}
+//   />
+// )}

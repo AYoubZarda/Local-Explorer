@@ -2,10 +2,13 @@ import React from 'react';
 import './MapContainer.css';
 
 const MapContainer = ({ getMapUrl }) => {
+
+  console.log(getMapUrl);
+
   return (
     <div className="card map-container">
       <iframe
-        src={getMapUrl()}
+        src={getMapUrl}
         width="100%"
         height="400"
         style={{ border: 0 }}

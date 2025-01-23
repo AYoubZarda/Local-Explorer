@@ -11,11 +11,12 @@
 
 
 .location-form {
-	background: #f2efe7a1;
+	background-color: #F5F0E5;
+	backdrop-filter: blur(10px);
+	border: 2px solid rgb(38, 118, 246);
 	border-radius: 0.5rem;
 	padding: 1.5rem;
-	box-shadow: 0px 0px 800px 19px #2972b2e3;
-	/* animation: appear 0.5s ease-out forwards; */
+	animation: appear 0.5s ease-out forwards;
 }
 
   .location-form form {

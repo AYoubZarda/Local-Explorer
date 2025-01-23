@@ -2,7 +2,9 @@ import React from 'react';
 import { MapPin } from 'lucide-react';
 import './LocationForm.css';
 
-const LocationForm = ({ location, setLocation, handleLocationSubmit }) => {
+
+
+const LocationForm = ({ location, setLocation, handleLocationSubmit, handleLocation, setMapUrl }) => {
   return (
     <div className="location-form">
       <form onSubmit={handleLocationSubmit}>
@@ -11,12 +13,18 @@ const LocationForm = ({ location, setLocation, handleLocationSubmit }) => {
             type="text"
             value={location}
             onChange={(e) => setLocation(e.target.value)}
-            placeholder="Enter your location"
-          />
+            placeholder="Choose Another City ... "
+            />
         </div>
         <button type="submit" className="submit-button">
+          Find city
+        </button>
+        <button
+          type="button" // Utilisez type="button" pour éviter de soumettre le formulaire
+          className="submit-button"
+          onClick={handleLocation}
+        >
           <MapPin className="icon" />
-          Find
         </button>
       </form>
     </div>
@@ -24,3 +32,5 @@ const LocationForm = ({ location, setLocation, handleLocationSubmit }) => {
 };
 
 export default LocationForm;
+
+{/* <MapPin className="icon" /> */}
