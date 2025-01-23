@@ -38,7 +38,7 @@ const ActivityCard = ({ activityPrompte, displayedActivity, showNextActivity, ha
           <Activity className="icon" />
           Next Activity
         </button>
-        <button onClick={handleRefresh} className="button blue">
+        <button onClick={handleRefresh} className="button submit-button">
           <RefreshCw className="icon" />
           Refresh
         </button>

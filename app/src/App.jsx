@@ -96,7 +96,6 @@ useEffect(() => {
         setWeather(null);
       }
     } catch (error) {
-      console.log(error);
       setError("Failed to fetch weather data");
       setWeather(null);
     }
@@ -166,12 +165,11 @@ useEffect(() => {
 
       const data = response.data;
       if (response.status === 200) {
-        const newActivities = data.candidates[0].content.parts[0].text
+        const newActivities = data.candidates[0].content.parts[0].text.replaceAll('*', '')
           .split("\n")
           .filter((activity) => activity.trim() !== "");
         setActivityPrompte(newActivities[0]);
-        console.log(newActivities);
-        setActivities((prev) => [...prev, ...newActivities.filter( activit => !(activit.startsWith("**") && activit.endsWith("**")))]);
+        setActivities((prev) => [...prev, ...newActivities]);
         setError(null);
         showNextActivity();
       } else {
@@ -217,7 +215,6 @@ useEffect(() => {
             handleLocation={handleLocation}
           />
         {error && <ErrorMessage error={error} />}
-        <ErrorMessage error={"hellloo"} />
         {weather && (
           <>
             <div className="weather-activity-grid">

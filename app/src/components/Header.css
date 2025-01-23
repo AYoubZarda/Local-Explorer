@@ -70,7 +70,7 @@
 	background-color: transparent;
 	font-size: 2.5rem;
 	font-weight: 700;
-	color: #cdd3e4bf;
+	color: var(--primary-color);
 	margin-bottom: 0.5rem;
 	/* animation: glow 1.5s infinite alternate; */
 	animation: lights 5s 750ms linear infinite;
@@ -78,5 +78,5 @@
   }
 
   .header p {
-	color: #b0b9d17d;
+	color: var(--primary-color);
   }

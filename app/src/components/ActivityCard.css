@@ -10,7 +10,47 @@
 }
 
 
-
+/* 
+@keyframes shring-animation {
+	0% {
+	  background-position: 0 0;
+	  opacity: 0;
+	  width: 0;
+	}
+	1% {
+	  background-position: 0 0;
+	  opacity: 1;
+	  border-right: 1px solid orange;
+	}
+	50% {
+	  background-position: 150px 0;
+	  opacity: 1;
+	  border-right: 1px solid orange;
+	}
+	100% {
+	  background-position: 400px 0;
+	  opacity: 1;
+	  border-right: 1px solid orange;
+	}
+  }
+  
+  @keyframes type {
+	0% {
+	  width: 0;
+	}
+	1%, 99%{
+	  border-right: 1px solid orange;
+	}
+	100%{
+	  border-right: none;
+	}
+  }
+  
+  @keyframes blink {
+	50% {
+	  border-color: transparent;
+	}
+  } */
 
 
 
@@ -29,65 +69,69 @@
   /* min-height: 165px;
   max-height: 165px; */
   height: 165px;
+  overflow-y: scroll;
   animation: glow 2s infinite alternate;
 
 }
 
+.prompte::-webkit-scrollbar {
+	display: none;
+  }
 
 .activity-card {
-	background-color: #F5F0E5;
+	background-color: rgb(183,170,156,20%);
 	backdrop-filter: blur(10px);
-	border: 2px solid rgb(38, 118, 246);
+	/* border: 2px solid rgb(38, 118, 246); */
 	border-radius: 0.5rem;
 	padding: 1.5rem;
+	/* display: flex;
+	flex-direction: column;
+	align-items: start;
+	justify-content: space-between; */
 }
 
 .activity-card h2 {
 	font-size: 1.5rem;
 	font-weight: 600;
-	color: #2563EB;
+	color: var(--primary-color);
 	margin-bottom: 1rem;
 	display: flex;
 	align-items: center;
 	gap: 0.5rem;;
-}
+  }
 
 
 
 .activity-content {
-	margin-bottom: 1rem;
+	/* margin-bottom: 1rem; */
 	display: grid;
 	gap: 20px;
-	transition: 1.5s;
 }
 
 .activity-prompt {
-	font-size: 1.25rem;
-	color: #000000;
+	font-size: 1rem;
+	color: var(--primary-color);
 	/* margin-bottom: 0.5rem; */
-	transform: 5s;
 	height: 130px ;
-	transition: 1.5s;
-
 }
 
 .activity-text {
 	/* min-height: 200px; */
 	font-weight: 500;
-	font-size: 1.125rem;
-	color: #63b3ed;
+	font-size: 1rem;
+	color: #90cdf4;
 }
 
 .no-activity {
-	color: #63b3ed;
-}
+	color: #90cdf4;
+  }
 
-.button-group {
+  .button-group {
 	display: flex;
 	gap: 1rem;
-}
+  }
 
-.button {
+  .button {
 	flex: 1;
 	display: flex;
 	align-items: center;
@@ -95,25 +139,25 @@
 	gap: 0.5rem;
 	padding: 0.5rem 1rem;
 	border: none;
-	border-radius: 0.5rem;
+	border-radius: 0.25rem;
 	color: white;
 	cursor: pointer;
 	transition: background-color 0.2s;
-}
+  }
 
-.button.green {
+  .button.green {
 	background-color: #059669;
-}
+  }
 
-.button.green:hover {
+  .button.green:hover {
 	background-color: #047857;
-}
+  }
 
-.button.blue {
+  .button.blue {
 	background-color: #2563EB;
-}
+  }
 
-.button.blue:hover {
+  .button.blue:hover {
 	background-color: #1D4ED8;
 }
 
@@ -246,4 +290,3 @@
 	  transform: translateX(15px);
 	}
   }
-  

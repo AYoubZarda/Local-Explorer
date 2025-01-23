@@ -69,7 +69,7 @@ const WeatherCard = ({ weather }) => {
   return (
     <div className="card weather-card">
       <h2>
-        <Cloud className="icon blue" />
+        <Cloud className="icon" color="#fbfbee" />
         Current Weather
       </h2>
       <div className="weather-grid">

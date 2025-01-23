@@ -1,19 +1,20 @@
 .weather-card {
 	/* background-color: #f2efe776; */
-	background-color: #F5F0E5;
+	background-color: rgb(183,170,156,20%);
 	backdrop-filter: blur(10px);
-	border: 2px solid rgb(38, 118, 246);
+	/* border: 2px solid rgb(38, 118, 246); */
 	border-radius: 0.5rem;
 	padding: 1.5rem;
 	display: flex;
 	flex-direction: column;
+	justify-content: space-between;
 	gap: 30px;
   }
 
   .weather-card h2 {
 	font-size: 1.5rem;
 	font-weight: 600;
-	color: #2563EB;
+	color: var(--primary-color);
 	margin-bottom: 1rem;
 	display: flex;
 	align-items: center;
@@ -34,13 +35,13 @@
 
   .weather-item .label {
 	font-size: 0.875rem;
-	color: #254152;
+	color: #90cdf4;
   }
 
   .weather-item .value {
-	font-size: 1.125rem;
-	font-weight: 600;
-	color: #1F2937;
+	font-size: 1rem;
+	font-weight: 400;
+	color: var(--primary-color);
   }
 
 
@@ -74,7 +75,7 @@
   
   .time {
 	color: #90cdf4;
-	font-size: 3.75rem;
+	font-size: clamp(2.5rem, 0.893vw + 2.321rem, 3.75rem);
 	font-family: monospace;
 	letter-spacing: 0.1em;
 	text-align: center;
@@ -83,10 +84,10 @@
   /* Optional animation for the clock box */
   @keyframes glow {
 	from {
-	  box-shadow: 0 0 20px -10px #3182ce;
+	  box-shadow: 0 0 20px -10px #559fe3aa;
 	}
 	to {
-	  box-shadow: 0 0 20px 5px #3182ce;
+	  box-shadow: 0 0 20px 5px #559fe3aa;
 	}
   }
   
