@@ -1,8 +1,21 @@
+@keyframes appear {
+	0% {
+	  opacity: 0;
+	  transform: translateY(50px);
+	}
+	100% {
+	  opacity: 1;
+	  transform: translateY(0);
+	}
+}
+
+
 .location-form {
 	background: #f2efe7a1;
 	border-radius: 0.5rem;
 	padding: 1.5rem;
 	box-shadow: 0px 0px 800px 19px #2972b2e3;
+	/* animation: appear 0.5s ease-out forwards; */
 }
 
   .location-form form {

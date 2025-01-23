@@ -4,12 +4,23 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Roboto', sans-serif;
+}
 
+
+@keyframes appear {
+	0% {
+	  opacity: 0;
+	  transform: translateY(50px);
+	}
+	100% {
+	  opacity: 1;
+	  transform: translateY(0);
+	}
 }
 
 
 .app-container {
-
+  
   min-height: 100vh;
   background: #213a59;
   padding: 1.5rem;
@@ -30,6 +41,7 @@
 .content-container {
   max-width: 64rem;
   margin: 0 auto;
+  animation: appear 0.5s ease-out forwards;
 }
 
 .icon {

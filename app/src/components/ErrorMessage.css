@@ -1,8 +1,21 @@
+@keyframes appear {
+	0% {
+	  opacity: 0;
+	  transform: translateY(50px);
+	}
+	100% {
+	  opacity: 1;
+	  transform: translateY(0);
+	}
+}
+
+
 .error-message {
 	background-color: #FEF2F2;
 	border-left: 4px solid #EF4444;
 	padding: 1rem;
 	margin-bottom: 1.5rem;
+	animation: appear 0.9s ease-out forwards;
   }
 
   .error-message p {

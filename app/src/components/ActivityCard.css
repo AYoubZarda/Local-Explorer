@@ -1,12 +1,24 @@
+@keyframes appear {
+	0% {
+	  opacity: 0;
+	  transform: translateY(50px);
+	}
+	100% {
+	  opacity: 1;
+	  transform: translateY(0);
+	}
+}
+
+
+
 .activity-card {
 	background-color: #F5F0E5;
 	backdrop-filter: blur(10px);
 	border: 2px solid rgb(38, 118, 246);
 
 	border-radius: 0.5rem;
-	padding: 1.5rem;
-
-  }
+	padding: 1.5rem; */
+}
 
   .activity-card h2 {
 	font-size: 1.5rem;

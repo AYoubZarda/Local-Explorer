@@ -44,27 +44,29 @@ const getlocalisation = async () => {
   else {
     setError("Failed to fetch localisation data");
   }
-
-
 }
 
-  useEffect(() => {
-    if (navigator.geolocation) {
-      console.log("navigator.geolocation ", navigator.geolocation);
-      navigator.geolocation.getCurrentPosition((position) => {
-        setPosition({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-        });
-        fetchWeather(position.coords.latitude, position.coords.longitude);
-      });
-      console.log("position ", position);
-      if (position.latitude === null || position.longitude === null) {
-        getlocalisation();
-      }
-    }
 
-  }, []);
+const handleLocation = () => {
+  if (navigator.geolocation) {
+    console.log("navigator.geolocation ", navigator.geolocation);
+    navigator.geolocation.getCurrentPosition((position) => {
+      fetchWeather(position.coords.latitude, position.coords.longitude);
+      setPosition({
+      latitude: position.coords.latitude,
+      longitude: position.coords.longitude,
+    });
+    } ,(error) => {
+      console.log("error ", error);
+      getlocalisation();}
+    ,);
+  }
+};
+
+useEffect(() => {
+  
+  handleLocation();
+}, []);
 
   const fetchWeather = async (latitude, longitude) => {
     const apiUrl = import.meta.env.VITE_WEATHER_API_URL;
@@ -75,6 +77,8 @@ const getlocalisation = async () => {
       return;
     }
 
+    console.log("latitude ", latitude);
+
     try {
       const response = await axios.get( `${apiUrl}?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`);
 
@@ -83,6 +87,7 @@ const getlocalisation = async () => {
         setWeather(data);
         setError(null);
         generateActivities(data);
+        return true;
       } else {
         setError(data.message);
         setWeather(null);
@@ -236,42 +241,3 @@ const getlocalisation = async () => {
 };
 
 export default App;
-
-
-
-      // <footer className="footer">
-      //   <div className="footer-content">
-      //     <div className="footer-section">
-      //       <h3>Weather & Activities</h3>
-      //       <p>Your personal weather companion and activity planner. Get real-time weather updates and tailored activity suggestions based on current conditions.</p>
-      //     </div>
-          
-      //     <div className="footer-section">
-      //       <h3>Quick Links</h3>
-      //       <ul>
-      //         <li><a href="#"><Globe className="footer-icon" /> Weather Updates</a></li>
-      //         <li><a href="#"><Activity className="footer-icon" /> Activities</a></li>
-      //         <li><a href="#"><MapPin className="footer-icon" /> Location Search</a></li>
-      //       </ul>
-      //     </div>
-          
-      //     <div className="footer-section">
-      //       <h3>Connect With Us</h3>
-      //       <div className="social-links">
-      //         <a href="https://github.com" target="_blank" rel="noopener noreferrer">
-      //           <Github className="footer-icon" />
-      //         </a>
-      //         <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
-      //           <Linkedin className="footer-icon" />
-      //         </a>
-      //         <a href="mailto:contact@weather-activities.com">
-      //           <Mail className="footer-icon" />
-      //         </a>
-      //       </div>
-      //     </div>
-      //   </div>
-        
-      //   <div className="footer-bottom">
-      //     <p>&copy; {new Date().getFullYear()} Weather & Activities. All rights reserved.</p>
-      //   </div>
-      // </footer>
