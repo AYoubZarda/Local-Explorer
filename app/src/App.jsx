@@ -13,6 +13,8 @@ import Footer        from "./components/Footer";
 
 
 
+
+
 function App() {
   const [position, setPosition] = useState({ latitude: null, longitude: null });
   const [location, setLocation] = useState("");
@@ -48,6 +50,8 @@ const getlocalisation = async () => {
 
 
 const handleLocation = () => {
+  setActivityPrompte("");
+  setActivityPrompte("");
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition((position) => {
       fetchWeather(position.coords.latitude, position.coords.longitude);
@@ -68,6 +72,8 @@ useEffect(() => {
   const fetchWeather = async (latitude, longitude) => {
     const apiUrl = import.meta.env.VITE_WEATHER_API_URL;
     const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
+    // setActivityPrompte("");
+    // setActivityPrompte("");
 
     if (!apiUrl || !apiKey) {
       setError("Weather API URL and key are required");
@@ -107,9 +113,10 @@ useEffect(() => {
 
     try {
       if (!location) {
-        setError("Location is required");
+        handleLocation()
         return;
       }
+      setActivityPrompte("");
       const response = await axios.get( `${apiUrl}?q=${location}&appid=${apiKey}&units=metric` );
       const data = response.data;
       if (response.status === 200) {
@@ -124,14 +131,14 @@ useEffect(() => {
     } catch (error) {
       console.log(error);
       setError("Failed to fetch weather data");
-      setWeather(null);
     }
   };
 
   const generateActivities = async (weatherData) => {
     const apiUrl = import.meta.env.VITE_ACTIVITY_API_URL;
     const apiKey = import.meta.env.VITE_ACTIVITY_API_KEY;
-
+    
+    
     if (!apiUrl || !apiKey) {
       setError("Activity API URL and key are required");
       return;
@@ -140,6 +147,7 @@ useEffect(() => {
     const prompt = `Based on the following location and weather conditions, suggest a list of the best activities to do today. The location is ${weatherData.name} (latitude: ${weatherData.coord.lat}, longitude: ${weatherData.coord.lon}). The current weather is ${weatherData.weather[0].description} with a temperature of ${weatherData.main.temp}°C, humidity of ${weatherData.main.humidity}%, and wind speed of ${weatherData.wind.speed} m/s. The visibility is ${weatherData.visibility} meters. Please recommend activities that are suitable for this weather and location, including outdoor, cultural, and leisure options.`;
 
     try {
+      setActivityPrompte("");
       const response = await axios.post(
         `${apiUrl}?key=${apiKey}`,
         {
@@ -162,7 +170,8 @@ useEffect(() => {
           .split("\n")
           .filter((activity) => activity.trim() !== "");
         setActivityPrompte(newActivities[0]);
-        setActivities((prev) => [...prev, ...newActivities]);
+        console.log(newActivities);
+        setActivities((prev) => [...prev, ...newActivities.filter( activit => !(activit.startsWith("**") && activit.endsWith("**")))]);
         setError(null);
         showNextActivity();
       } else {
@@ -186,7 +195,7 @@ useEffect(() => {
       setDisplayedActivity(nextActivity);
       setUsedActivities((prev) => new Set([...prev, nextActivity]));
     } else {
-      setDisplayedActivity("No more unique activities. Refresh for more!");
+      setDisplayedActivity("No more unique activities. Click to Next Activity or Refresh for more!");
     }
   };
 
@@ -196,17 +205,6 @@ useEffect(() => {
     }
   };
 
-  // const getMapUrl = () => {
-
-  //   if(location !==  "" && position.latitude === null && position.longitude === null)
-  //     {
-  //       const locatio = `${weather.name},${weather.sys.country || ''}`;
-  //       console.log("locatio from input", locatio);
-  //       return ;
-
-  //     }
-  //   return;
-  // };
 
   return (
     <div className="app-container">
@@ -219,6 +217,7 @@ useEffect(() => {
             handleLocation={handleLocation}
           />
         {error && <ErrorMessage error={error} />}
+        <ErrorMessage error={"hellloo"} />
         {weather && (
           <>
             <div className="weather-activity-grid">
@@ -235,21 +234,9 @@ useEffect(() => {
           </>
         )}
       </div>
-    
       <Footer />
-
-
     </div>
   );
 };
 
 export default App;
-
-
-// {!position.latitude && !position.longitude && (
-//   <LocationForm
-//     location={location}
-//     setLocation={setLocation}
-//     handleLocationSubmit={handleLocationSubmit}
-//   />
-// )}

@@ -10,47 +10,7 @@
 }
 
 
-/* 
-@keyframes shring-animation {
-	0% {
-	  background-position: 0 0;
-	  opacity: 0;
-	  width: 0;
-	}
-	1% {
-	  background-position: 0 0;
-	  opacity: 1;
-	  border-right: 1px solid orange;
-	}
-	50% {
-	  background-position: 150px 0;
-	  opacity: 1;
-	  border-right: 1px solid orange;
-	}
-	100% {
-	  background-position: 400px 0;
-	  opacity: 1;
-	  border-right: 1px solid orange;
-	}
-  }
-  
-  @keyframes type {
-	0% {
-	  width: 0;
-	}
-	1%, 99%{
-	  border-right: 1px solid orange;
-	}
-	100%{
-	  border-right: none;
-	}
-  }
-  
-  @keyframes blink {
-	50% {
-	  border-color: transparent;
-	}
-  } */
+
 
 
 
@@ -90,7 +50,7 @@
 	display: flex;
 	align-items: center;
 	gap: 0.5rem;;
-  }
+}
 
 
 
@@ -98,13 +58,17 @@
 	margin-bottom: 1rem;
 	display: grid;
 	gap: 20px;
+	transition: 1.5s;
 }
 
 .activity-prompt {
 	font-size: 1.25rem;
 	color: #000000;
 	/* margin-bottom: 0.5rem; */
+	transform: 5s;
 	height: 130px ;
+	transition: 1.5s;
+
 }
 
 .activity-text {
@@ -116,14 +80,14 @@
 
 .no-activity {
 	color: #63b3ed;
-  }
+}
 
-  .button-group {
+.button-group {
 	display: flex;
 	gap: 1rem;
-  }
+}
 
-  .button {
+.button {
 	flex: 1;
 	display: flex;
 	align-items: center;
@@ -135,20 +99,151 @@
 	color: white;
 	cursor: pointer;
 	transition: background-color 0.2s;
-  }
+}
 
-  .button.green {
+.button.green {
 	background-color: #059669;
-  }
+}
 
-  .button.green:hover {
+.button.green:hover {
 	background-color: #047857;
-  }
+}
 
-  .button.blue {
+.button.blue {
 	background-color: #2563EB;
-  }
+}
 
-  .button.blue:hover {
+.button.blue:hover {
 	background-color: #1D4ED8;
+}
+
+/* .loader{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, sans-serif;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  height: 165px;
+  animation: glow 0.3s infinite alternate;
+
+} */
+
+
+
+/* From Uiverse.io by zanina-yassine */ 
+.container {
+	width: 250px;
+	height: 250px;
+	padding: 15px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: 1.5s;
+	width: 100%;
+	height: 150px;
+
   }
+  
+  .cloud {
+	width: 250px;
+  }
+  
+  .front {
+	padding-top: 45px;
+	margin-left: 25px;
+	display: inline;
+	position: absolute;
+	z-index: 11;
+	animation: clouds 8s infinite;
+	animation-timing-function: ease-in-out;
+  }
+  
+  .back {
+	margin-top: -30px;
+	margin-left: 150px;
+	z-index: 12;
+	animation: clouds 12s infinite;
+	animation-timing-function: ease-in-out;
+  }
+  
+  .right-front {
+	width: 45px;
+	height: 45px;
+	border-radius: 50% 50% 50% 0%;
+	background-color: #4c9beb;
+	display: inline-block;
+	margin-left: -25px;
+	z-index: 5;
+  }
+  
+  .left-front {
+	width: 65px;
+	height: 65px;
+	border-radius: 50% 50% 0% 50%;
+	background-color: #4c9beb;
+	display: inline-block;
+	z-index: 5;
+  }
+  
+  .right-back {
+	width: 50px;
+	height: 50px;
+	border-radius: 50% 50% 50% 0%;
+	background-color: #4c9beb;
+	display: inline-block;
+	margin-left: -10px;
+	z-index: 5;
+}
+
+.left-back {
+	width: 30px;
+	height: 30px;
+	border-radius: 50% 50% 0% 50%;
+	background-color: #4c9beb;
+	display: inline-block;
+	margin-left: 70px;
+	z-index: 5;
+  }
+  
+  .sun {
+	width: 120px;
+	height: 120px;
+	background: -webkit-linear-gradient(to right, #fcbb04, #fffc00);
+	background: linear-gradient(to right, #fcbb04, #fffc00);
+	border-radius: 60px;
+	display: inline;
+	position: absolute;
+  }
+  
+  .sunshine {
+	animation: sunshines 2s infinite;
+  }
+  
+  @keyframes sunshines {
+	0% {
+	  transform: scale(1);
+	  opacity: 0.6;
+	}
+  
+	100% {
+	  transform: scale(1.4);
+	  opacity: 0;
+	}
+  }
+  
+  @keyframes clouds {
+	0% {
+	  transform: translateX(15px);
+	}
+  
+	50% {
+	  transform: translateX(0px);
+	}
+  
+	100% {
+	  transform: translateX(15px);
+	}
+  }
+  
