@@ -11,8 +11,7 @@
 .app-container {
 
   min-height: 100vh;
-  background: black;
-  /* background: linear-gradient(0, #000000 50%, #00b7ff 100%); */
+  background: #213a59;
   padding: 1.5rem;
 }
 
@@ -33,7 +32,6 @@
   margin: 0 auto;
 }
 
-/* Icon styles */
 .icon {
   width: 1.25rem;
   height: 1.25rem;
@@ -60,21 +58,20 @@
 }
 
 ::-webkit-scrollbar {
-  width: 8px; /* Width of the scrollbar */
+  width: 8px; 
 }
 
-/* Style the scrollbar track */
 ::-webkit-scrollbar-track {
   background-color: black;
 }
 
-/* Style the scrollbar thumb */
+
 ::-webkit-scrollbar-thumb {
-  background: #0d395765; /* Color of the scrollbar thumb */
-  border-radius: 9px; /* Rounded corners */
+  background: #0d395765; 
+  border-radius: 9px;
 }
 
-/* Style the scrollbar thumb on hover */
+
 ::-webkit-scrollbar-thumb:hover {
-  background: #0d395794; /* Color of the scrollbar thumb on hover */
+  background: #0d395794; 
 }

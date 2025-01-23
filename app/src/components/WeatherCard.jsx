@@ -3,6 +3,68 @@ import { Cloud, Compass, Droplets, Eye, ThermometerSun, Wind } from 'lucide-reac
 import './WeatherCard.css';
 
 
+
+
+
+
+
+
+
+
+
+
+
+import { useState, useEffect } from 'react';
+
+
+const DigitalClock = () => {
+  const [date, setDate] = useState(new Date());
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setDate(new Date());
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  const formatDate = (date) => {
+    const options = { 
+      weekday: 'long', 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric' 
+    };
+    return date.toLocaleDateString('fr-FR', options);
+  };
+
+  const formatTime = (date) => {
+    return date.toLocaleTimeString('fr-FR', { 
+      hour: '2-digit', 
+      minute: '2-digit', 
+      second: '2-digit' 
+    });
+  };
+
+  return (
+    <div className="clock-container">
+      <div className="clock-box">
+        <div className="date">
+          {formatDate(date)}
+        </div>
+        <div className="time">
+          {formatTime(date)}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+
+
+
+
+
 const WeatherCard = ({ weather }) => {
   return (
     <div className="card weather-card">
@@ -52,8 +114,11 @@ const WeatherCard = ({ weather }) => {
             <p className="label">Location</p>
             <p className="value">{weather.name}</p>
           </div>
+
+
         </div>
       </div>
+          <DigitalClock />
     </div>
   );
 };

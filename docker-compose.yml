@@ -6,10 +6,10 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./app:/app_continer
+      - ./app/src:/app_continer/src
     env_file:
       - .env
-    restart: always
+    # restart: always
     networks:
       - localexplorer_network
 
