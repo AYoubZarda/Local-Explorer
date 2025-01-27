@@ -48,6 +48,10 @@ Design accessible et engageant, adapté à tous les niveaux de compétence techn
 Transitions fluides et éléments visuels attrayants pour une expérience utilisateur optimale.
 
 
+ # 🌐 Accéder à l'application en ligne
+L'application est hébergée sur Vercel et accessible via le lien suivant :
+ ## 👉 https://local-explorer-vercel-d2x4.vercel.app/
+
 # 🛠️ Installation et utilisation
 
 Prérequis:
