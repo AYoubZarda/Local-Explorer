@@ -66,7 +66,7 @@ Prérequis:
 Clonez ce dépôt :
 
 
-    git clone https://github.com/votre-utilisateur/local-explorer.git
+    git clone https://github.com/AYoubZarda/local-explorer.git
     cd local-explorer
 
  ### Configurez les variables d'environnement :
